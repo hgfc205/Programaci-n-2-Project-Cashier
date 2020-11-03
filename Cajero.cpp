@@ -38,8 +38,10 @@ int main(){
 		}
 		else{
 			intento++;
-			std::cout<<"\n  El nombre de usuario o la contraseña ingresada es erronea \n";
-			std::cout<<" Vuelva a ingresar sus datos \n";
+			if (intento<4){
+				std::cout<<"\n  El nombre de usuario o la contraseña ingresada es erronea \n";
+				std::cout<<" Vuelva a ingresar sus datos \n";
+			}
 			
 			if (intento==4){
                 std::cout<<"-------------------------------------------------------------------------------------------";
