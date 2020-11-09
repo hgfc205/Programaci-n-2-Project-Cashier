@@ -3,7 +3,8 @@
 #include <strings.h>
 
 char username[10], password[10];
-int intento, continuar;
+int intento, continuar, realizar;
+int monto_retirar, monto_total;
 
 int main(){
 	intento=1;
@@ -22,9 +23,42 @@ int main(){
 		     system("cls");
 			 std::cout<<"--------------------------------------------------------------------------";
 			 std::cout<<"\n Welcome!!!\n";
+			 std::cout<<" Que es lo que desea realizar en el cajero? \n";
+			 std::cout<<" (1-Retirar efectivo, 2-Consultar saldo, 3-Depositar) \n";
+			 std::cout<<" (4-Transferencia, 5-Cambio de nip (contraseña)) \n";
+			 std::cin>>realizar;
 			 
+			 while (realizar>6){
+			 	 system ("cls");
+			 	 std::cout<<"\n La acción que quiere realizar no está disponible \n";
+			 	 std::cout<<" Seleccione la acción correcta \n";
+			 	 std::cout<<" Que es lo que desea realizar en el cajero? \n";
+				 std::cout<<" (1-Retirar efectivo, 2-Consultar saldo, 3-Depositar) \n";
+				 std::cout<<" (4-Transferencia, 5-Cambio de nip (contraseña)) \n";
+				 std::cin>>realizar;
+			 }
+			 
+			 switch (realizar){
+			 	 case 1: 
+			 	 std::cout<<"\n";
+			 	 std::cout<<"\n Actualmente tiene "<<monto_total<<" dineros \n";
+				 std::cout<<"\n Ingrese el monto a retirar ";
+			 	 std::cin>>monto_retirar;
+			 	 
+			 	 while (monto_retirar>monto_total){
+			 	 	 system("cls");
+			 	 	 std::cout<<" No tiene tanto dinero en su cuenta \n";
+			 	 	 std::cout<<" Actualmente tiene "<<monto_total<<" dineros \n";
+			 	 	 std::cout<<" Ingrese el monto a retirar ";
+					 std::cin>>monto_retirar;
+				  }
+				  
+				 std::cout<<"\n";
+				 std::cout<<"\n El retiro se ha realizado correctamente \n";
+			 }
 			 
 			 std::cout<<"\n Jejeje, Thank You \n";
+			 std::cout<<"--------------------------------------------------------------------------";
 			 std::cout<<"\n ¿Desea continuar? (1- continuar y 2- salir) ";
 			 std::cin>>continuar;
 			 
