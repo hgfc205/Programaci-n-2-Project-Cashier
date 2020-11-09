@@ -55,6 +55,8 @@ int main(){
 				  
 				 std::cout<<"\n";
 				 std::cout<<"\n El retiro se ha realizado correctamente \n";
+				 monto_total=monto_total-monto_retirar;
+				 std::cout<<" Actualmente tiene "<<monto_total<<" dineros en el cajero \n";
 			 }
 			 
 			 std::cout<<"\n Jejeje, Thank You \n";
