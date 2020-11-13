@@ -1,23 +1,36 @@
 #include <iostream>
 #include <conio.h>
-#include <strings.h>
+#include <string.h>
 
-char username[10], password[10];
-int intento, continuar, realizar;
+char num_account[]={'paco', 'maria', 'jorge'};
+char nip[]={'6554', '2358', '1789'};
+char username, password, new_pass, encontrado;
+
+int intento, continuar, salir, realizar, casilla;
+
 int monto_retirar, monto_total;
+int num_cuenta, monto_dt;
+int i;
 
 int main(){
-	intento=1;
-	std::cout<<" Bienvenido!!!\n";
+	salir=2;
 	
-	while (intento<4){
+	while (salir==2){
+		std::cout<<" Bienvenido!!!\n";
 		std::cout<<"--------------------------------------------------------------------------";
 		std::cout<<"\n ingrese su nombre de usuario: "; 
 		std::cin>>username;
 		std::cout<<"\n ingrese su contraseña: ";
 		std::cin>>password;
 		
-		if (strcmp(username, "paco")== 0 && strcmp(password, "1234")== 0){
+	    for (i=1; i<4; i++){
+	    	if (num_account[i]==username and nip[i]==password){
+	    		encontrado='v';
+	    		casilla=i;
+			}
+		}
+		 
+		if (encontrado=='v'){
 			continuar=1;
 			while (continuar==1){
 		     system("cls");
@@ -58,6 +71,44 @@ int main(){
 				 monto_total=monto_total-monto_retirar;
 				 std::cout<<" Actualmente tiene "<<monto_total<<" dineros en el cajero \n";
 				 break;
+				 
+				 case 2:
+				 std::cout<<"\n";
+				 std::cout<<"\n El saldo que tiene en la cuenta es de "<<monto_total<<" dineros \n";
+				 break;
+				 
+				 case 3:
+				 std::cout<<"\n";
+				 std::cout<<"\n #Num de cuenta a depositar ";
+				 std::cin>>num_cuenta;
+				 std::cout<<"\n Monto a depositar ";
+				 std::cin>>monto_dt;
+				 break;
+				 
+				 case 4:
+				 std::cout<<"\n";
+				 std::cout<<"\n #Num de cuenta a transferir ";
+				 std::cin>>num_cuenta;
+				 std::cout<<"\n Monto a depositar ";
+				 std::cin>>monto_dt;
+				 break;
+				 
+				 case 5:
+				 //cambio de nip
+				 std::cout<<" Ingrese su actual contraseña ";
+				 std::cin>>password;
+				 
+				 while (nip[casilla]!=password){
+				 	 std::cout<<"\n la contraseña ingresada es incorrecta \n";
+				 	 std::cout<<" Vuelva a ingresar su actual contraseña \n";
+				 	 std::cout<<" Contraseña ";
+				 	 std::cin>>password;
+				 }
+				 
+				 std::cout<<" Ingrese su nueva contraseña ";
+				 std::cin>>new_pass;
+				 nip[casilla]=new_pass;
+				 break;
 			 }
 			 
 			 std::cout<<"\n Jejeje, Thank You \n";
@@ -68,10 +119,6 @@ int main(){
 			 while (continuar>2){
 			 	 std::cout<<"\n Ingrese el dato correcto (1- continuar y 2- salir) ";
 			 	 std::cin>>continuar;
-			 }
-			 
-			 if (continuar==2){
-			 	 intento=4;
 			 }
 			}
 		}
@@ -90,6 +137,9 @@ int main(){
 				std::cout<<" HA BLOQUEADO LA CUENTA!!!, F en el chat \n";
 			}
 		}
+		
+		std::cout<<" Desea salir? (1-si 2-no) \n";
+		std::cin>>salir;
 	}
 	
 	system("cls");
