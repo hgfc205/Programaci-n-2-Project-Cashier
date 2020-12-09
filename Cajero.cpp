@@ -1,150 +1,176 @@
 #include <iostream>
-#include <conio.h>
 #include <string.h>
-
-char num_account[]={'paco', 'maria', 'jorge'};
-char nip[]={'6554', '2358', '1789'};
-char username, password, new_pass, encontrado;
-
-int intento, continuar, salir, realizar, casilla;
-
-int monto_retirar, monto_total;
-int num_cuenta, monto_dt;
-int i;
+#include <conio.h>
 
 int main(){
-	salir=2;
+	long num_account[]={0,0,4139878,5789651,7865142};
+	int nip[]={0,0,1234,1234,1234};
+	int efectivo[]={0,500,500,500,500};
+	int block[]={0,0,0,0,0};
 	
-	while (salir==2){
+	long contra, user, accion, dinero, num_cuenta;
+	
+	char continuar, sesion, casilla, casilla2; //variables para los ciclos while
+	int i, cont; //variables iteradoras
+	
+	continuar='s';
+	while ((continuar=='s') or (continuar=='S')){
 		std::cout<<" Bienvenido!!!\n";
-		std::cout<<"--------------------------------------------------------------------------";
-		std::cout<<"\n ingrese su nombre de usuario: "; 
-		std::cin>>username;
-		std::cout<<"\n ingrese su contraseña: ";
-		std::cin>>password;
+		std::cout<<" Ingrese su numero de cuenta: ";
+		std::cin>>user;
+		std::cout<<"\n Ingrese su nip: ";
+		std::cin>>contra;
 		
-	    for (i=1; i<4; i++){
-	    	if (num_account[i]==username and nip[i]==password){
-	    		encontrado='v';
-	    		casilla=i;
+		i=1;
+		casilla=0;
+		while ((casilla==0) && (i<5)){
+			if ((num_account[i]==user) && (nip[i]==contra))
+			{
+				casilla=i;
+			} 
+			else if ((nip[i]!=contra) && (num_account[i]==user))
+			{
+				block[i]=block[i]+1;
 			}
-		}
-		 
-		if (encontrado=='v'){
-			continuar=1;
-			while (continuar==1){
-		     system("cls");
-			 std::cout<<"--------------------------------------------------------------------------";
-			 std::cout<<"\n Welcome!!!\n";
-			 std::cout<<" Que es lo que desea realizar en el cajero? \n";
-			 std::cout<<" (1-Retirar efectivo, 2-Consultar saldo, 3-Depositar) \n";
-			 std::cout<<" (4-Transferencia, 5-Cambio de nip (contraseña)) \n";
-			 std::cin>>realizar;
-			 
-			 while (realizar>6){
-			 	 system ("cls");
-			 	 std::cout<<"\n La acción que quiere realizar no está disponible \n";
-			 	 std::cout<<" Seleccione la acción correcta \n";
-			 	 std::cout<<" Que es lo que desea realizar en el cajero? \n";
-				 std::cout<<" (1-Retirar efectivo, 2-Consultar saldo, 3-Depositar) \n";
-				 std::cout<<" (4-Transferencia, 5-Cambio de nip (contraseña)) \n";
-				 std::cin>>realizar;
-			 }
-			 
-			 switch (realizar){
-			 	 case 1: 
-			 	 std::cout<<"\n";
-			 	 std::cout<<"\n Actualmente tiene "<<monto_total<<" dineros \n";
-				 std::cout<<"\n Ingrese el monto a retirar ";
-			 	 std::cin>>monto_retirar;
-			 	 
-			 	 while (monto_retirar>monto_total){
-			 	 	 system("cls");
-			 	 	 std::cout<<" No tiene tanto dinero en su cuenta \n";
-			 	 	 std::cout<<" Actualmente tiene "<<monto_total<<" dineros \n";
-			 	 	 std::cout<<" Ingrese el monto a retirar ";
-					 std::cin>>monto_retirar;
-				  }
-				  
-				 std::cout<<"\n";
-				 std::cout<<"\n El retiro se ha realizado correctamente \n";
-				 monto_total=monto_total-monto_retirar;
-				 std::cout<<" Actualmente tiene "<<monto_total<<" dineros en el cajero \n";
-				 break;
-				 
-				 case 2:
-				 std::cout<<"\n";
-				 std::cout<<"\n El saldo que tiene en la cuenta es de "<<monto_total<<" dineros \n";
-				 break;
-				 
-				 case 3:
-				 std::cout<<"\n";
-				 std::cout<<"\n #Num de cuenta a depositar ";
-				 std::cin>>num_cuenta;
-				 std::cout<<"\n Monto a depositar ";
-				 std::cin>>monto_dt;
-				 break;
-				 
-				 case 4:
-				 std::cout<<"\n";
-				 std::cout<<"\n #Num de cuenta a transferir ";
-				 std::cin>>num_cuenta;
-				 std::cout<<"\n Monto a depositar ";
-				 std::cin>>monto_dt;
-				 break;
-				 
-				 case 5:
-				 //cambio de nip
-				 std::cout<<" Ingrese su actual contraseña ";
-				 std::cin>>password;
-				 
-				 while (nip[casilla]!=password){
-				 	 std::cout<<"\n la contraseña ingresada es incorrecta \n";
-				 	 std::cout<<" Vuelva a ingresar su actual contraseña \n";
-				 	 std::cout<<" Contraseña ";
-				 	 std::cin>>password;
-				 }
-				 
-				 std::cout<<" Ingrese su nueva contraseña ";
-				 std::cin>>new_pass;
-				 nip[casilla]=new_pass;
-				 break;
-			 }
-			 
-			 std::cout<<"\n Jejeje, Thank You \n";
-			 std::cout<<"--------------------------------------------------------------------------";
-			 std::cout<<"\n ¿Desea continuar? (1- continuar y 2- salir) ";
-			 std::cin>>continuar;
-			 
-			 while (continuar>2){
-			 	 std::cout<<"\n Ingrese el dato correcto (1- continuar y 2- salir) ";
-			 	 std::cin>>continuar;
-			 }
-			}
-		}
-		else{
-			intento++;
-			system("cls");
-			if (intento<4){
-				std::cout<<"--------------------------------------------------------------------------";
-				std::cout<<"\n  El nombre de usuario o la contraseña ingresada es erronea \n";
-				std::cout<<" Vuelva a ingresar sus datos \n";
-			}
-			
-			if (intento==4){
-                std::cout<<"--------------------------------------------------------------------------";
-				std::cout<<"\n Ha ingresado la contra erroneamente 3 veces seguidas!!! \n";
-				std::cout<<" HA BLOQUEADO LA CUENTA!!!, F en el chat \n";
-			}
+			i++;
 		}
 		
-		std::cout<<" Desea salir? (1-si 2-no) \n";
-		std::cin>>salir;
+		if ((casilla>0) && (block[casilla]<4))
+		{
+			sesion='n';
+			while ((sesion=='n') or (sesion=='N'))
+			{
+				system("cls");
+				std::cout<<".................................................\n";
+				std::cout<<" que desea realizar \n";
+				std::cout<<" 1-Consulta de saldo \n";
+				std::cout<<" 2-Retiro de efectivo \n";
+				std::cout<<" 3-Depositar \n";
+				std::cout<<" 4-Transferencia \n";
+				std::cout<<" 5-Cambio de Nip \n";
+				std::cout<<".................................................\n";
+				std::cout<<" Que acción desea realizar: ";
+				std::cin>>accion;
+				std::cout<<"\n";	
+				
+				switch(accion){
+					case 1:
+						std::cout<<" Su saldo es de: "<<efectivo[casilla]<<" pesotes \n";
+					break;
+					
+					case 2:
+						std::cout<<" Su saldo actual es de: "<<efectivo[casilla]<<" pesotes \n";
+						std::cout<<"Ingrese el monto a retirar: ";
+						std::cin>>dinero;
+						
+						while (dinero>efectivo[casilla]){
+							system("cls");
+							std::cout<<" Su saldo es de: "<<efectivo[casilla]<<" pesotes \n";
+							std::cout<<" no puede retirar un monto mas grande del que tiene\n";
+							std::cout<<" Vuelva a ingresar el saldo a retirar: ";
+							std::cin>>dinero;
+						}
+						
+						efectivo[casilla]=efectivo[casilla]-dinero;
+						std::cout<<"Retiro efectuado correctamente \n";
+					break;
+					
+					case 3:
+						std::cout<<"Ingrese la cuenta a depositar: ";
+						std::cin>>num_cuenta;
+						
+						casilla2=0;
+						i=1;
+						while ((casilla2==0) && (i<5))
+						{
+							if (num_cuenta==num_account[i]){
+								casilla2=i;
+							}
+							i++;
+						}
+						
+						if (casilla2>0){
+							std::cout<<"Ingrese la cantidad a depositar: ";
+							std::cin>>dinero;
+							
+							efectivo[casilla2]=efectivo[casilla2]+dinero;
+							efectivo[casilla]=efectivo[casilla]-dinero;
+							std::cout<<" el deposito se ha efectuado correctamente \n";
+						} else{
+							std::cout<<" no se encontró a nadie con ese numero de cuenta\n";
+						}
+					break;
+					
+					case 4:
+						std::cout<<"Ingrese el #num cuenta a transferir: ";
+						std::cin>>num_cuenta;
+						
+						casilla2=0;
+						i=1;
+						while ((casilla2==0) && (i<5))
+						{
+							if (num_cuenta==num_account[i]){
+								casilla2=i;
+							}
+							i++;
+						}
+						
+						if (casilla2>0){
+							std::cout<<"Ingrese la cantidad a transferir: ";
+							std::cin>>dinero;
+							
+							efectivo[casilla2]=efectivo[casilla2]+dinero;
+							efectivo[casilla]=efectivo[casilla]-dinero;
+							std::cout<<" la tranferencia se ha efectuado correctamente \n";
+						} else{
+							std::cout<<" no se encontró a nadie con ese numero de cuenta\n";
+						}
+					break;
+					
+					case 5:
+						std::cout<<" Ingrese su actual contraseña: ";
+						std::cin>>contra;
+						
+						casilla2=0;
+						i=1;
+						while ((casilla==0) && (i<5))
+						{
+							if (contra==nip[i]){
+								casilla=i;
+							}
+							i++;
+						}
+						
+						if (casilla>0){
+							std::cout<<"Ingrese su nueva contraseña: ";
+							std::cin>>contra;
+							nip[casilla]=contra;
+						} else 
+						{
+							std::cout<<" la contraseña ingresada no es la contraseña que está usando actualmente";
+						}
+					break;
+				}					
+				
+				std::cout<<".................................................\n";
+				std::cout<<" Desea cerrar sesion? ";
+				std::cin>>sesion;
+			}
+		} else
+		{
+			if (block[casilla]>=4)
+			{
+				std::cout<<"HIJOLEE!!!... \n";
+				std::cout<<"La cuenta está Bloqueada";
+			}
+			else
+			{
+				std::cout<<" la contraseña o el #num de cuenta utilizado es incorrecto";
+			}
+		}
+		system("cls");
+		std::cout<<" Gracias por usar el cajero. adios, vuelva pronto!!!";			
 	}
-	
-	system("cls");
-	std::cout<<"--------------------------------------------------------------------------";
-	std::cout<<"\n Come Back Anytime!!! :D \n";
-	getch();
 	return 0;
 }
+	
